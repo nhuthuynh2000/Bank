@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "SsEW+J4gCM8=",
+  "dgSpecHash": "6oMPw0Xsm1Q=",
   "success": true,
-  "projectFilePath": "C:\\Users\\ADMIN\\Desktop\\CV\\Bank\\BankSystem.csproj",
+  "projectFilePath": "c:\\Users\\ADMIN\\Desktop\\CV\\Bank\\BankSystem.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ADMIN\\.nuget\\packages\\guna.ui2.winforms\\2.0.4.6\\guna.ui2.winforms.2.0.4.6.nupkg.sha512",
     "C:\\Users\\ADMIN\\.nuget\\packages\\microsoft.netcore.platforms\\3.1.0\\microsoft.netcore.platforms.3.1.0.nupkg.sha512",
