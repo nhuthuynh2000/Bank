@@ -17,15 +17,14 @@ namespace BankSystem.View
     {
         private CustomerController controller;
         private CustomerModel customer;
-        private BindingList<CustomerModel> customerList; // Thêm BindingList
-    
+        private BindingList<CustomerModel> customerList;
+
         public CustomerView()
         {
             InitializeComponent();
             controller = new CustomerController();
             customer = new CustomerModel();
-            customerList = new BindingList<CustomerModel>(); // Khởi tạo BindingList
-                                                             // Gán sự kiện Load
+            customerList = new BindingList<CustomerModel>();
             this.Load += new EventHandler(CustomerView_Load);
         }
 
@@ -35,7 +34,7 @@ namespace BankSystem.View
             customer.name = txtname.Text.Trim();
             customer.phone = txtphone.Text.Trim();
             customer.email = txtemail.Text.Trim();
-            customer.house_no = txthouseno.Text.Trim(); 
+            customer.house_no = txthouseno.Text.Trim();
             customer.city = txtcity.Text.Trim();
             customer.pin = txtpin.Text.Trim();
         }
@@ -44,10 +43,8 @@ namespace BankSystem.View
         {
             if (guna2DataGridView1.SelectedRows.Count > 0)
             {
-                // Lấy dòng được chọn
                 DataGridViewRow selectedRow = guna2DataGridView1.SelectedRows[0];
 
-                // Tạo một đối tượng BranchModel từ dữ liệu của dòng đã chọn
                 customer = new CustomerModel
                 {
                     id = selectedRow.Cells["id"].Value.ToString(),
@@ -60,7 +57,6 @@ namespace BankSystem.View
 
                 };
 
-                // Cập nhật dữ liệu vào TextBox
                 txtid.Text = customer.id;
                 txtname.Text = customer.name;
                 txtphone.Text = customer.phone;
@@ -71,7 +67,6 @@ namespace BankSystem.View
 
             }
         }
-        //Search theo ID
         public void SearchCustomerById(string id)
         {
 
@@ -87,14 +82,14 @@ namespace BankSystem.View
 
         public void UpdateDataGridView()
         {
-            customerList.Clear(); // Xóa danh sách hiện tại trước khi thêm mới
+            customerList.Clear();
 
             foreach (var customer in controller.Items.Cast<CustomerModel>())
             {
-                customerList.Add(customer); // Thêm mỗi chi nhánh vào BindingList
+                customerList.Add(customer);
             }
 
-            guna2DataGridView1.DataSource = customerList; // Gán BindingList làm nguồn dữ liệu
+            guna2DataGridView1.DataSource = customerList;
         }
         private void LoadCustomers()
         {
@@ -113,9 +108,9 @@ namespace BankSystem.View
                         pin = customer.pin
                     }).ToList();
 
-                    guna2DataGridView1.DataSource = customerData; // Gán danh sách mới
+                    guna2DataGridView1.DataSource = customerData;
 
-                    // Đặt tên hiển thị cho các cột
+
                     guna2DataGridView1.Columns["id"].HeaderText = "Mã Chi Nhánh";
                     guna2DataGridView1.Columns["name"].HeaderText = "Tên Chi Nhánh";
                     guna2DataGridView1.Columns["phone"].HeaderText = "Số điện thoại";
@@ -151,7 +146,7 @@ namespace BankSystem.View
         {
             if (e.RowIndex >= 0)
             {
-                SetDataToText(); // Hiển thị dữ liệu row được chọn
+                SetDataToText();
             }
         }
 
@@ -159,7 +154,7 @@ namespace BankSystem.View
         {
             if (guna2DataGridView1.SelectedRows.Count > 0)
             {
-                SetDataToText(); // Cập nhật dữ liệu trong TextBox khi chọn dòng mới
+                SetDataToText();
             }
         }
 
@@ -170,23 +165,23 @@ namespace BankSystem.View
 
         private void btn_search_Click(object sender, EventArgs e)
         {
-            string id = txtsearch.Text; 
+            string id = txtsearch.Text;
             SearchCustomerById(id);
         }
 
         private void btn_create_Click(object sender, EventArgs e)
         {
             GetDataFromText();
-            if (customer.IsValidate()) 
+            if (customer.IsValidate())
             {
                 try
                 {
-                    
+
                     if (controller.Create(customer))
                     {
                         MessageBox.Show("Khách hàng đã được thêm thành công!");
                         ClearForm();
-                        LoadCustomers(); 
+                        LoadCustomers();
                     }
                     else
                     {
@@ -217,7 +212,7 @@ namespace BankSystem.View
                     {
                         MessageBox.Show("Khách hàng đã được cập nhật thành công!");
                         ClearForm();
-                        LoadCustomers(); 
+                        LoadCustomers();
                     }
                     else
                     {
@@ -240,7 +235,7 @@ namespace BankSystem.View
         {
             GetDataFromText();
 
-            if (customer.IsValidate()) 
+            if (customer.IsValidate())
             {
                 try
                 {
@@ -249,7 +244,7 @@ namespace BankSystem.View
                     {
                         MessageBox.Show("Khách hàng đã được xóa thành công!");
                         ClearForm();
-                        LoadCustomers(); 
+                        LoadCustomers();
                     }
                     else
                     {
@@ -272,11 +267,11 @@ namespace BankSystem.View
             txtid.Text = string.Empty;
             txtname.Text = string.Empty;
             txtemail.Text = string.Empty;
-            txthouseno.Text = string.Empty; 
+            txthouseno.Text = string.Empty;
             txtpin.Text = string.Empty;
             txtphone.Text = string.Empty;
             txtcity.Text = string.Empty;
-           
+
         }
     }
 }

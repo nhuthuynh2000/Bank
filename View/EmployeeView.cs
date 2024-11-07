@@ -24,8 +24,8 @@ namespace BankSystem.View
             InitializeComponent();
             controller = new EmployeeController();
             employee = new EmployeeModel();
-            employeeList = new BindingList<EmployeeModel>(); // Khởi tạo BindingList
-                                                             
+            employeeList = new BindingList<EmployeeModel>();
+
             this.Load += new EventHandler(EmployeeView_Load);
         }
 
@@ -40,10 +40,8 @@ namespace BankSystem.View
         {
             if (guna2DataGridView1.SelectedRows.Count > 0)
             {
-                // Lấy dòng được chọn
                 DataGridViewRow selectedRow = guna2DataGridView1.SelectedRows[0];
 
-                // Tạo một đối tượng BranchModel từ dữ liệu của dòng đã chọn
                 employee = new EmployeeModel
                 {
                     id = selectedRow.Cells["id"].Value.ToString(),
@@ -51,7 +49,6 @@ namespace BankSystem.View
                     role = selectedRow.Cells["role"].Value.ToString(),
                 };
 
-                // Cập nhật dữ liệu vào TextBox
                 txtid.Text = employee.id;
                 txtpassword.Text = employee.password;
                 txtrole.Text = employee.role;
@@ -62,9 +59,8 @@ namespace BankSystem.View
         private void EmployeeView_Load(object sender, EventArgs e)
         {
             LoadEmployees();
-            ClearForm(); 
+            ClearForm();
         }
-        //Search theo ID
         public void SearchEmployeeById(string id)
         {
 
@@ -79,14 +75,14 @@ namespace BankSystem.View
         }
         public void UpdateDataGridView()
         {
-            employeeList.Clear(); // Xóa danh sách hiện tại trước khi thêm mới
+            employeeList.Clear();
 
             foreach (var employee in controller.Items.Cast<EmployeeModel>())
             {
-                employeeList.Add(employee); // Thêm mỗi nhân viên vào BindingList
+                employeeList.Add(employee);
             }
 
-            guna2DataGridView1.DataSource = employeeList; // Gán BindingList làm nguồn dữ liệu
+            guna2DataGridView1.DataSource = employeeList;
         }
 
         private void LoadEmployees()
@@ -103,9 +99,8 @@ namespace BankSystem.View
 
                     }).ToList();
 
-                    guna2DataGridView1.DataSource = employeeData; 
+                    guna2DataGridView1.DataSource = employeeData;
 
-                    // Đặt tên hiển thị cho các cột
                     guna2DataGridView1.Columns["id"].HeaderText = "Mã Nhân Viên";
                     guna2DataGridView1.Columns["password"].HeaderText = "Mật khẩu";
                     guna2DataGridView1.Columns["role"].HeaderText = "Vai trò";
@@ -124,24 +119,24 @@ namespace BankSystem.View
 
         private void btn_search_Click(object sender, EventArgs e)
         {
-            string id = txtsearch.Text; 
+            string id = txtsearch.Text;
             SearchEmployeeById(id);
         }
 
         private void btn_create_Click(object sender, EventArgs e)
         {
             GetDataFromText();
-                              
-            if (employee.IsValidate()) 
+
+            if (employee.IsValidate())
             {
                 try
                 {
-                    
+
                     if (controller.Create(employee))
                     {
                         MessageBox.Show("Nhân viên đã được thêm thành công!");
                         ClearForm();
-                        LoadEmployees(); 
+                        LoadEmployees();
                     }
                     else
                     {
@@ -200,7 +195,7 @@ namespace BankSystem.View
                 try
                 {
 
-                   
+
                     if (controller.Delete(employee))
                     {
                         MessageBox.Show("Nhân viên đã được xóa thành công!");
@@ -228,7 +223,7 @@ namespace BankSystem.View
         {
             if (e.RowIndex >= 0)
             {
-                SetDataToText(); // Hiển thị dữ liệu row được chọn
+                SetDataToText();
             }
         }
 
@@ -236,20 +231,20 @@ namespace BankSystem.View
         {
             if (guna2DataGridView1.SelectedRows.Count > 0)
             {
-                SetDataToText(); // Cập nhật dữ liệu trong TextBox khi chọn dòng mới
+                SetDataToText();
             }
         }
 
         private void btn_back_Click(object sender, EventArgs e)
         {
-            LoadEmployees(); // Gọi lại phương thức để tải lại danh sách chi nhánh
+            LoadEmployees();
 
         }
         private void ClearForm()
         {
             txtid.Text = string.Empty;
             txtpassword.Text = string.Empty;
-            txtrole.SelectedIndex = -1; // Xóa lựa chọn.
+            txtrole.SelectedIndex = -1;
             txtrole.Text = string.Empty;
 
         }

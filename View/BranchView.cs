@@ -18,7 +18,7 @@ namespace BankSystem.View
     {
         private BranchController controller;
         private BranchModel branch;
-        private BindingList<BranchModel> branchList; // Thêm BindingList
+        private BindingList<BranchModel> branchList;
 
 
         public BranchView()
@@ -27,14 +27,14 @@ namespace BankSystem.View
             controller = new BranchController();
             branch = new BranchModel();
             branchList = new BindingList<BranchModel>();
-           
+
         }
 
         private void guna2DataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0)
             {
-                SetDataToText(); // Hiển thị dữ liệu row được chọn
+                SetDataToText();
             }
         }
 
@@ -58,25 +58,25 @@ namespace BankSystem.View
 
         }
 
-        
+
         private void guna2DataGridView1_SelectionChanged(object sender, EventArgs e)
         {
             if (guna2DataGridView1.SelectedRows.Count > 0)
             {
-                SetDataToText(); // Cập nhật dữ liệu trong TextBox khi chọn dòng mới
+                SetDataToText();
             }
 
         }
 
-      
+
 
         public void GetDataFromText()
         {
             branch.id = txtid.Text.Trim();
             branch.name = txtname.Text.Trim();
             branch.city = txtcity.Text.Trim();
-            branch.house_no = txthouseno.Text.Trim(); 
-           
+            branch.house_no = txthouseno.Text.Trim();
+
         }
         public void SetDataToText()
         {
@@ -95,12 +95,12 @@ namespace BankSystem.View
 
                 };
 
-                // Cập nhật dữ liệu vào TextBox
+
                 txtid.Text = branch.id;
                 txtname.Text = branch.name;
                 txtcity.Text = branch.city;
                 txthouseno.Text = branch.house_no;
-                
+
 
             }
 
@@ -114,14 +114,14 @@ namespace BankSystem.View
 
         public void UpdateDataGridView()
         {
-            branchList.Clear(); // Xóa danh sách hiện tại trước khi thêm mới
+            branchList.Clear();
 
             foreach (var branch in controller.Items.Cast<BranchModel>())
             {
-                branchList.Add(branch); // Thêm mỗi chi nhánh vào BindingList
+                branchList.Add(branch);
             }
 
-            guna2DataGridView1.DataSource = branchList; // Gán BindingList làm nguồn dữ liệu
+            guna2DataGridView1.DataSource = branchList;
         }
 
         private void LoadBranches()
@@ -139,7 +139,7 @@ namespace BankSystem.View
                     }).ToList();
 
                     guna2DataGridView1.DataSource = branchData;
-                    // Đặt tên hiển thị cho các cột
+
                     guna2DataGridView1.Columns["id"].HeaderText = "Mã Chi Nhánh";
                     guna2DataGridView1.Columns["name"].HeaderText = "Tên Chi Nhánh";
                     guna2DataGridView1.Columns["house_no"].HeaderText = "Địa chỉ";
@@ -159,18 +159,18 @@ namespace BankSystem.View
 
         private void btn_create_Click(object sender, EventArgs e)
         {
-            GetDataFromText(); 
-                             
-            if (branch.IsValidate()) 
+            GetDataFromText();
+
+            if (branch.IsValidate())
             {
                 try
                 {
-                    
+
                     if (controller.Create(branch))
                     {
                         MessageBox.Show("Chi nhánh đã được thêm thành công!");
                         ClearForm();
-                        LoadBranches(); 
+                        LoadBranches();
                     }
                     else
                     {
@@ -193,17 +193,17 @@ namespace BankSystem.View
         {
             GetDataFromText();
 
-            if (branch.IsValidate()) 
+            if (branch.IsValidate())
             {
                 try
                 {
 
-                    // Gọi hàm Delete với đối tượng BranchModel
+
                     if (controller.Delete(branch))
                     {
                         MessageBox.Show("Chi nhánh đã được xóa thành công!");
                         ClearForm();
-                        LoadBranches(); 
+                        LoadBranches();
                     }
                     else
                     {
@@ -219,7 +219,7 @@ namespace BankSystem.View
             {
                 MessageBox.Show("Dữ liệu không hợp lệ. Vui lòng kiểm tra lại.");
             }
-    ClearForm() ;
+            ClearForm();
         }
 
         private void btn_edit_Click(object sender, EventArgs e)
@@ -234,7 +234,7 @@ namespace BankSystem.View
                     {
                         MessageBox.Show("Chi nhánh đã được cập nhật thành công!");
                         ClearForm();
-                        LoadBranches(); 
+                        LoadBranches();
                     }
                     else
                     {
@@ -255,16 +255,16 @@ namespace BankSystem.View
         }
 
 
-               private void ClearForm()
+        private void ClearForm()
         {
-                txtid.Text = string.Empty;
-    
+            txtid.Text = string.Empty;
+
             txtname.Text = string.Empty;
-   
+
             txthouseno.Text = string.Empty;
-   
+
             txtcity.Text = string.Empty;
-    
+
         }
 
 
@@ -291,7 +291,7 @@ namespace BankSystem.View
         private void btn_back_Click(object sender, EventArgs e)
         {
 
-            LoadBranches(); 
+            LoadBranches();
         }
     }
 

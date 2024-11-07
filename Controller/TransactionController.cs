@@ -1,15 +1,11 @@
 ﻿using BankSystem.Model;
-using System;
-using System.Collections.Generic;
-using System.Data.Common;
 using System.Data.SqlClient;
-using System.Transactions;
 
 namespace BankSystem.Controller
 {
     internal class TransactionController : IController
     {
-        private readonly string connectionString = "server=BAONGOC\\DULICH;Initial Catalog=DotNet;User ID=sa;Password=123456";
+        private readonly string connectionString = "server=localhost\\MSSQLSERVER;Initial Catalog=Bank;User ID=sa;Password=123456";
         private List<IModel> transactions = new List<IModel>();
         public List<IModel> Items => transactions;
 
@@ -21,19 +17,19 @@ namespace BankSystem.Controller
                 {
                     connection.Open();
 
-                 
+
                     string query = "SELECT COUNT(*) FROM [ACCOUNT] WHERE id = @accountId";
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
-                   
+
                         command.Parameters.AddWithValue("@accountId", transaction.from_account_id);
 
                         int count = (int)command.ExecuteScalar();
-                        return count > 0; 
+                        return count > 0;
                     }
                 }
             }
-            return false; 
+            return false;
         }
 
 
@@ -41,50 +37,49 @@ namespace BankSystem.Controller
         {
             if (model is TransactionModel transaction)
             {
-               
 
-                // Lấy from_account_id từ transaction và gán to_account_id bằng from_account_id
-                int fromAccountId = transaction.from_account_id; 
+
+                int fromAccountId = transaction.from_account_id;
                 int toAccountId = fromAccountId;
 
 
-               
+
                 if (!AccountExists(fromAccountId))
                 {
                     MessageBox.Show("Tài khoản không tồn tại.");
-                    return false; 
+                    return false;
                 }
 
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
                     connection.Open();
 
-                    // Lấy giá trị ID tiếp theo
+
                     transaction.id = GetNextTransactionId();
 
                     string query = "INSERT INTO [TRANSACTION] (id, from_account_id, branch_id, date_of_trans, amount, to_account_id, employee_id) VALUES (@id, @from_account_id, @branch_id, @date_of_trans, @amount, @to_account_id, @employee_id)";
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
                         command.Parameters.AddWithValue("@id", transaction.id);
-                        command.Parameters.AddWithValue("@from_account_id", fromAccountId); 
+                        command.Parameters.AddWithValue("@from_account_id", fromAccountId);
                         command.Parameters.AddWithValue("@branch_id", transaction.branch_id);
-                  
+
 
                         if (transaction.date_of_trans == null || transaction.date_of_trans == DateTime.MinValue)
                         {
-                           
+                            //
                         }
                         else
                         {
                             command.Parameters.AddWithValue("@date_of_trans", transaction.date_of_trans);
-                            
+
                         }
                         command.Parameters.AddWithValue("@amount", transaction.amount);
-                      
-                        command.Parameters.AddWithValue("@to_account_id", toAccountId); 
-                     
+
+                        command.Parameters.AddWithValue("@to_account_id", toAccountId);
+
                         command.Parameters.AddWithValue("@employee_id", transaction.employee_id);
-                
+
 
                         try
                         {
@@ -96,12 +91,11 @@ namespace BankSystem.Controller
                             MessageBox.Show("Đã xảy ra lỗi: " + ex.Message);
                             return false;
                         }
-                        return false;
-                       
+
                     }
                 }
             }
-            return false; 
+            return false;
         }
 
 
@@ -115,54 +109,50 @@ namespace BankSystem.Controller
                 {
                     command.Parameters.AddWithValue("@accountId", accountId);
                     int count = (int)command.ExecuteScalar();
-                    return count > 0; 
+                    return count > 0;
                 }
             }
         }
 
-        //Làm id tự động tăng
         public int GetNextTransactionId()
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 connection.Open();
 
-                // Truy vấn để lấy giá trị ID lớn nhất
+
                 string query = "SELECT ISNULL(MAX(id), 0) FROM [TRANSACTION]";
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
-                    
-                    return (int)command.ExecuteScalar() + 1; // Tăng thêm 1
+
+                    return (int)command.ExecuteScalar() + 1;
                 }
             }
         }
-        //Withdraw
+
         public bool Withdraw(IModel model)
         {
             if (model is TransactionModel transaction)
             {
-                // Lấy from_account_id từ transaction
                 int fromAccountId = transaction.from_account_id;
 
-            
+
                 if (!AccountExists(fromAccountId))
                 {
                     MessageBox.Show("Tài khoản không tồn tại.");
-                    return false; 
+                    return false;
                 }
 
-                // Kiểm tra số dư tài khoản trước khi rút
                 if (!HasSufficientBalance(fromAccountId, transaction.amount))
                 {
                     MessageBox.Show("Số dư không đủ để thực hiện giao dịch này.");
-                    return false; 
+                    return false;
                 }
 
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
                     connection.Open();
 
-                    // Lấy giá trị ID tiếp theo
                     transaction.id = GetNextTransactionId();
 
                     string query = "INSERT INTO [TRANSACTION] (id, from_account_id, branch_id, date_of_trans, amount, to_account_id, employee_id) VALUES (@id, @from_account_id, @branch_id, @date_of_trans, @amount, @to_account_id, @employee_id)";
@@ -172,7 +162,7 @@ namespace BankSystem.Controller
                         command.Parameters.AddWithValue("@from_account_id", fromAccountId);
                         command.Parameters.AddWithValue("@branch_id", transaction.branch_id);
 
-                        if (transaction.date_of_trans == null || transaction.date_of_trans == DateTime.MinValue)
+                        if (transaction.date_of_trans == DateTime.MinValue)
                         {
                             MessageBox.Show("transaction.date_of_trans chưa được gán giá trị hoặc là giá trị mặc định.");
                         }
@@ -181,14 +171,14 @@ namespace BankSystem.Controller
                             command.Parameters.AddWithValue("@date_of_trans", transaction.date_of_trans);
                         }
 
-                        command.Parameters.AddWithValue("@amount", -transaction.amount); // Rút tiền 
-                        command.Parameters.AddWithValue("@to_account_id", fromAccountId); // Đặt lại to_account_id
+                        command.Parameters.AddWithValue("@amount", -transaction.amount);
+                        command.Parameters.AddWithValue("@to_account_id", fromAccountId);
                         command.Parameters.AddWithValue("@employee_id", transaction.employee_id);
 
                         try
                         {
                             int rowsAffected = command.ExecuteNonQuery();
-                          
+
                             return true;
                         }
                         catch (Exception ex)
@@ -199,9 +189,8 @@ namespace BankSystem.Controller
                     }
                 }
             }
-            return false; 
+            return false;
         }
-        // kiểm tra xem tài khoản có đủ số dư để thực hiện giao dịch hay không.
         private bool HasSufficientBalance(int accountId, double amount)
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
@@ -211,8 +200,8 @@ namespace BankSystem.Controller
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@accountId", accountId);
-                    double balance = (double)command.ExecuteScalar(); 
-                    return balance >= amount; 
+                    double balance = (double)command.ExecuteScalar();
+                    return balance >= amount;
                 }
             }
         }
@@ -223,7 +212,7 @@ namespace BankSystem.Controller
                 int fromAccountId = transaction.from_account_id;
                 int toAccountId = transaction.to_account_id;
 
-             
+
                 if (!AccountExists(fromAccountId) || !AccountExists(toAccountId))
                 {
                     MessageBox.Show("Tài khoản không tồn tại.");
@@ -245,13 +234,13 @@ namespace BankSystem.Controller
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
                     connection.Open();
-                    transaction.id = GetNextTransactionId(); // Lấy ID tiếp theo cho giao dịch
+                    transaction.id = GetNextTransactionId();
 
                     using (var transactionScope = connection.BeginTransaction())
                     {
                         try
                         {
-                            
+
                             string updateFromAccountQuery = "UPDATE ACCOUNT SET balance = balance - @amount WHERE id = @from_account_id";
                             using (SqlCommand command = new SqlCommand(updateFromAccountQuery, connection, transactionScope))
                             {
@@ -260,7 +249,7 @@ namespace BankSystem.Controller
                                 command.ExecuteNonQuery();
                             }
 
-                        
+
                             string updateToAccountQuery = "UPDATE ACCOUNT SET balance = balance + @amount WHERE id = @to_account_id";
                             using (SqlCommand command = new SqlCommand(updateToAccountQuery, connection, transactionScope))
                             {
@@ -281,21 +270,20 @@ namespace BankSystem.Controller
                                 command.ExecuteNonQuery();
                             }
 
-                            // Cam kết giao dịch
                             transactionScope.Commit();
                         }
                         catch (Exception ex)
                         {
-                            
+
                             transactionScope.Rollback();
                             MessageBox.Show($"Có lỗi xảy ra khi thực hiện giao dịch: {ex.Message}");
                             return false;
                         }
                     }
                 }
-                return true; 
+                return true;
             }
-            return false; 
+            return false;
         }
 
 
@@ -374,8 +362,8 @@ namespace BankSystem.Controller
                                 id = reader.GetInt32(0),
                                 from_account_id = reader.GetInt32(1),
                                 branch_id = reader.GetString(2),
-                                date_of_trans = reader.GetDateTime(3), 
-                                amount = reader.GetDouble(4), 
+                                date_of_trans = reader.GetDateTime(3),
+                                amount = reader.GetDouble(4),
                                 to_account_id = reader.GetInt32(5),
                                 employee_id = reader.GetString(6)
                             };
@@ -409,7 +397,7 @@ namespace BankSystem.Controller
                                     id = reader.GetInt32(0),
                                     from_account_id = reader.GetInt32(1),
                                     branch_id = reader.GetString(2),
-                                    date_of_trans = reader.GetDateTime(3), 
+                                    date_of_trans = reader.GetDateTime(3),
                                     amount = reader.GetDouble(4),
                                     to_account_id = reader.GetInt32(5),
                                     employee_id = reader.GetString(6)

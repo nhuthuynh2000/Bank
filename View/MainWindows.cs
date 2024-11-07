@@ -7,7 +7,7 @@ namespace BankSystem
 {
     public partial class MainWindows : Form
     {
-        public bool isLoggedIn = false; // Biến theo dõi trạng thái đăng nhập
+        public bool isLoggedIn = false;
         public string role = "";
 
 
@@ -15,14 +15,14 @@ namespace BankSystem
         {
             InitializeComponent();
             UpdateMenuItems();
-            SetMenuItemsEnabled(false); // Menu mờ đi
+            SetMenuItemsEnabled(false);
             this.IsMdiContainer = true;
 
         }
 
         private void SetMenuItemsEnabled(bool enabled)
         {
-            menu_account.Enabled = enabled; // Bật/tắt menu tài khoản
+            menu_account.Enabled = enabled;
             menu_branch.Enabled = enabled;
             menu_sys.Enabled = enabled;
             menu_employee.Enabled = enabled;
@@ -36,7 +36,7 @@ namespace BankSystem
 
         private void UpdateMenuItems()
         {
-            // Hiển thị hoặc ẩn menu đăng nhập và đăng xuất dựa trên trạng thái đăng nhập
+
             menu_login.Visible = !isLoggedIn;
             menu_system_logout.Visible = isLoggedIn;
         }
@@ -48,10 +48,10 @@ namespace BankSystem
 
         private void menu_system_logout_Click(object sender, EventArgs e)
         {
-            isLoggedIn = false; // Đặt lại trạng thái đăng nhập
-            role = ""; // Đặt lại vai trò
-            SetMenuItemsEnabled(false); 
-            UpdateMenuItems(); 
+            isLoggedIn = false;
+            role = "";
+            SetMenuItemsEnabled(false);
+            UpdateMenuItems();
         }
 
         private void menu_login_Click(object sender, EventArgs e)
@@ -59,25 +59,24 @@ namespace BankSystem
             if (!isLoggedIn)
             {
                 LoginForm loginForm = new LoginForm(this);
-                loginForm.ShowDialog(); 
+                loginForm.ShowDialog();
 
-                // Kiểm tra trạng thái đăng nhập sau khi đóng LoginForm
-                if (isLoggedIn) // Nếu đăng nhập thành công
+                if (isLoggedIn)
                 {
-                    menu_login.Visible = false; // Thay đổi văn bản thành Đăng xuất
+                    menu_login.Visible = false;
                     SetMenuItemsEnabled(true);
-                    menu_login.Image = Properties.Resources.icons8_logout_48; 
-                                                                            
+                    menu_login.Image = Properties.Resources.icons8_logout_48;
+
                     if (role == "Admin")
                     {
-                        menu_account.Visible = true; // Hiển thị cho Admin
+                        menu_account.Visible = true;
                         menu_employee.Visible = true;
                         menu_branch.Visible = true;
                         menu_customer.Visible = true; ;
                     }
                     else
                     {
-                        menu_account.Visible = false; 
+                        menu_account.Visible = false;
                         menu_employee.Visible = false;
                         menu_employee.Visible = false;
 
@@ -88,18 +87,17 @@ namespace BankSystem
             }
             else
             {
-                // Nếu đã đăng nhập, thực hiện đăng xuất
                 menu_login.Image = Properties.Resources.icons8_login_35;
-                isLoggedIn = false; 
+                isLoggedIn = false;
                 role = "";
-                SetMenuItemsEnabled(false); // Tắt các mục menu
-                UpdateMenuItems(); // Cập nhật giao diện
+                SetMenuItemsEnabled(false);
+                UpdateMenuItems();
             }
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
-            
+
         }
 
         private void menu_sys_Click(object sender, EventArgs e)
@@ -129,7 +127,7 @@ namespace BankSystem
             EmployeeView employee = new EmployeeView();
             employee.MdiParent = this;
             employee.Show();
-           employee.WindowState = FormWindowState.Maximized;
+            employee.WindowState = FormWindowState.Maximized;
 
         }
 
@@ -138,7 +136,7 @@ namespace BankSystem
             AccountView account = new AccountView();
             account.MdiParent = this;
             account.Show();
-           account.WindowState = FormWindowState.Maximized;
+            account.WindowState = FormWindowState.Maximized;
 
         }
 
@@ -158,7 +156,7 @@ namespace BankSystem
 
         private void menu_report_Click(object sender, EventArgs e)
         {
-           
+
         }
 
         private void rútTiềnToolStripMenuItem_Click(object sender, EventArgs e)
@@ -191,13 +189,12 @@ namespace BankSystem
 
         private void menu_system_logout_Click_1(object sender, EventArgs e)
         {
-            // Nếu đã đăng nhập, thực hiện đăng xuất
             menu_login.Visible = true;
             menu_login.Image = Properties.Resources.icons8_login_35;
-            isLoggedIn = false; 
-            role = ""; 
-            SetMenuItemsEnabled(false); 
-            UpdateMenuItems(); 
+            isLoggedIn = false;
+            role = "";
+            SetMenuItemsEnabled(false);
+            UpdateMenuItems();
         }
     }
 }

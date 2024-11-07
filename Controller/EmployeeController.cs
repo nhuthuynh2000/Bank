@@ -1,13 +1,11 @@
 ﻿using BankSystem.Model;
-using System;
-using System.Collections.Generic;
 using System.Data.SqlClient;
 
 namespace BankSystem.Controller
 {
     internal class EmployeeController : IController
     {
-        private readonly string connectionString = "server=BAONGOC\\DULICH;Initial Catalog=DotNet;User ID=sa;Password=123456";
+        private readonly string connectionString = "server=localhost\\MSSQLSERVER;Initial Catalog=Bank;User ID=sa;Password=123456";
         private List<IModel> employees = new List<IModel>();
         public List<IModel> Items => employees;
 
@@ -224,12 +222,12 @@ namespace BankSystem.Controller
             }
             return false;
         }
-        // Lấy thông tin nhân viên đang hoạt động.
+
         public EmployeeModel GetActiveEmployee()
         {
             return activeEmployee;
         }
-        // Đặt nhân viên đang hoạt động.
+
 
         public void SetActiveEmployee(EmployeeModel employee)
         {

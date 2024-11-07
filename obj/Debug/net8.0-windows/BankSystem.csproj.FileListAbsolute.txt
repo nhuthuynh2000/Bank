@@ -37,3 +37,43 @@ D:\Dot Net\BankSystem\obj\Debug\net8.0-windows\BankSystem.View.WithdrawView.reso
 D:\Dot Net\BankSystem\obj\Debug\net8.0-windows\BankSystem.View.Report.resources
 D:\Dot Net\BankSystem\obj\Debug\net8.0-windows\BankSystem.View.Deposit.resources
 D:\Dot Net\BankSystem\obj\Debug\net8.0-windows\BankSystem.View.TransferView.resources
+c:\Users\ADMIN\Desktop\CV\Bank\bin\Debug\net8.0-windows\BankSystem.exe
+c:\Users\ADMIN\Desktop\CV\Bank\bin\Debug\net8.0-windows\BankSystem.deps.json
+c:\Users\ADMIN\Desktop\CV\Bank\bin\Debug\net8.0-windows\BankSystem.runtimeconfig.json
+c:\Users\ADMIN\Desktop\CV\Bank\bin\Debug\net8.0-windows\BankSystem.dll
+c:\Users\ADMIN\Desktop\CV\Bank\bin\Debug\net8.0-windows\BankSystem.pdb
+c:\Users\ADMIN\Desktop\CV\Bank\bin\Debug\net8.0-windows\Guna.UI2.dll
+c:\Users\ADMIN\Desktop\CV\Bank\bin\Debug\net8.0-windows\System.Data.SqlClient.dll
+c:\Users\ADMIN\Desktop\CV\Bank\bin\Debug\net8.0-windows\System.Management.dll
+c:\Users\ADMIN\Desktop\CV\Bank\bin\Debug\net8.0-windows\runtimes\win-arm64\native\sni.dll
+c:\Users\ADMIN\Desktop\CV\Bank\bin\Debug\net8.0-windows\runtimes\win-x64\native\sni.dll
+c:\Users\ADMIN\Desktop\CV\Bank\bin\Debug\net8.0-windows\runtimes\win-x86\native\sni.dll
+c:\Users\ADMIN\Desktop\CV\Bank\bin\Debug\net8.0-windows\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
+c:\Users\ADMIN\Desktop\CV\Bank\bin\Debug\net8.0-windows\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
+c:\Users\ADMIN\Desktop\CV\Bank\bin\Debug\net8.0-windows\runtimes\win\lib\net7.0\System.Management.dll
+c:\Users\ADMIN\Desktop\CV\Bank\obj\Debug\net8.0-windows\BankSystem.csproj.AssemblyReference.cache
+c:\Users\ADMIN\Desktop\CV\Bank\obj\Debug\net8.0-windows\BankSystem.Properties.Resources.resources
+c:\Users\ADMIN\Desktop\CV\Bank\obj\Debug\net8.0-windows\BankSystem.View.AccountView.resources
+c:\Users\ADMIN\Desktop\CV\Bank\obj\Debug\net8.0-windows\BankSystem.View.BranchView.resources
+c:\Users\ADMIN\Desktop\CV\Bank\obj\Debug\net8.0-windows\BankSystem.View.CustomerView.resources
+c:\Users\ADMIN\Desktop\CV\Bank\obj\Debug\net8.0-windows\BankSystem.View.Deposit.resources
+c:\Users\ADMIN\Desktop\CV\Bank\obj\Debug\net8.0-windows\BankSystem.View.DepositView.resources
+c:\Users\ADMIN\Desktop\CV\Bank\obj\Debug\net8.0-windows\BankSystem.View.EmployeeView.resources
+c:\Users\ADMIN\Desktop\CV\Bank\obj\Debug\net8.0-windows\BankSystem.View.LoginForm.resources
+c:\Users\ADMIN\Desktop\CV\Bank\obj\Debug\net8.0-windows\BankSystem.MainWindows.resources
+c:\Users\ADMIN\Desktop\CV\Bank\obj\Debug\net8.0-windows\BankSystem.View.Report.resources
+c:\Users\ADMIN\Desktop\CV\Bank\obj\Debug\net8.0-windows\BankSystem.View.TransactionView.resources
+c:\Users\ADMIN\Desktop\CV\Bank\obj\Debug\net8.0-windows\BankSystem.View.TransferView.resources
+c:\Users\ADMIN\Desktop\CV\Bank\obj\Debug\net8.0-windows\BankSystem.View.WithdrawView.resources
+c:\Users\ADMIN\Desktop\CV\Bank\obj\Debug\net8.0-windows\BankSystem.csproj.GenerateResource.cache
+c:\Users\ADMIN\Desktop\CV\Bank\obj\Debug\net8.0-windows\BankSystem.GeneratedMSBuildEditorConfig.editorconfig
+c:\Users\ADMIN\Desktop\CV\Bank\obj\Debug\net8.0-windows\BankSystem.AssemblyInfoInputs.cache
+c:\Users\ADMIN\Desktop\CV\Bank\obj\Debug\net8.0-windows\BankSystem.AssemblyInfo.cs
+c:\Users\ADMIN\Desktop\CV\Bank\obj\Debug\net8.0-windows\BankSystem.csproj.CoreCompileInputs.cache
+c:\Users\ADMIN\Desktop\CV\Bank\obj\Debug\net8.0-windows\BankSystem.sourcelink.json
+c:\Users\ADMIN\Desktop\CV\Bank\obj\Debug\net8.0-windows\BankSystem.csproj.Up2Date
+c:\Users\ADMIN\Desktop\CV\Bank\obj\Debug\net8.0-windows\BankSystem.dll
+c:\Users\ADMIN\Desktop\CV\Bank\obj\Debug\net8.0-windows\refint\BankSystem.dll
+c:\Users\ADMIN\Desktop\CV\Bank\obj\Debug\net8.0-windows\BankSystem.pdb
+c:\Users\ADMIN\Desktop\CV\Bank\obj\Debug\net8.0-windows\BankSystem.genruntimeconfig.cache
+c:\Users\ADMIN\Desktop\CV\Bank\obj\Debug\net8.0-windows\ref\BankSystem.dll

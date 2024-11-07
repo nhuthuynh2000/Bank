@@ -64,7 +64,7 @@ namespace BankSystem.View
         {
             if (txtaccount.SelectedItem is AccountModel selectedAccount)
             {
-                this.selectedAccount = selectedAccount; // Lưu tài khoản đã chọn
+                this.selectedAccount = selectedAccount;
                 SetDataToText();
             }
         }
@@ -81,16 +81,16 @@ namespace BankSystem.View
 
         private void UpdateAccountBalance(AccountModel account, double withdrawAmount)
         {
-            account.balance -= withdrawAmount; // Trừ tiền khỏi tài khoản
-            accountController.Update(account); // Cập nhật tài khoản
-            txtbalance.Text = account.balance.ToString("F2"); // Cập nhật giao diện
+            account.balance -= withdrawAmount;
+            accountController.Update(account);
+            txtbalance.Text = account.balance.ToString("F2");
         }
 
         private void SaveWithdrawTransaction(AccountModel account, double withdrawAmount, EmployeeModel employee)
         {
             var transaction = new TransactionModel
             {
-                id = 0, // ID tự động sinh
+                id = 0,
                 amount = -withdrawAmount,
                 branch_id = "HCM",
                 date_of_trans = DateTime.Now,
@@ -99,7 +99,7 @@ namespace BankSystem.View
                 employee_id = employee.id,
             };
 
-            // Gọi controller để lưu giao dịch
+
             if (!transactionController.Withdraw(transaction))
             {
                 ShowError("Không thể lưu giao dịch rút tiền.");
@@ -126,17 +126,16 @@ namespace BankSystem.View
             {
                 try
                 {
-                    // Kiểm tra số dư trước khi rút tiền
                     if (selectedAccount.balance < withdrawAmount)
                     {
                         ShowError("Số dư không đủ để thực hiện giao dịch.");
                         return;
                     }
 
-                    SaveWithdrawTransaction(selectedAccount, withdrawAmount, employee); // Lưu giao dịch
-                    UpdateAccountBalance(selectedAccount, withdrawAmount); // Cập nhật số dư
+                    SaveWithdrawTransaction(selectedAccount, withdrawAmount, employee);
+                    UpdateAccountBalance(selectedAccount, withdrawAmount);
                     MessageBox.Show("Rút tiền thành công!");
-                    txtamount.Text = "0.00"; // Reset ô nhập tiền
+                    txtamount.Text = "0.00";
                 }
                 catch (Exception ex)
                 {
@@ -152,7 +151,7 @@ namespace BankSystem.View
 
         private void btn_withdraw_Click_1(object sender, EventArgs e)
         {
-            GetDataFromText(); // Lấy dữ liệu từ giao diện và xử lý rút tiền
+            GetDataFromText();
         }
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

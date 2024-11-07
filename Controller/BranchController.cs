@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
+﻿using System.Data.SqlClient;
 using BankSystem.Model;
 
 namespace BankSystem.Controller
 {
     internal class BranchController : IController
     {
-        private readonly string connectionString = "server=BAONGOC\\DULICH;Initial Catalog=DotNet;User ID=sa;Password=123456";
+        private readonly string connectionString = "server=localhost\\MSSQLSERVER;Initial Catalog=Bank;User ID=sa;Password=123456";
         private List<IModel> branches = new List<IModel>();
         public List<IModel> Items => branches;
 

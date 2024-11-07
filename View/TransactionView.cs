@@ -26,7 +26,6 @@ namespace BankSystem.View
             LoadTransactions();
             txtid.SelectedIndexChanged += Txtid_SelectedIndexChanged;
 
-            // Khởi tạo đối tượng PrintDocument
             printDocument = new PrintDocument();
             printDocument.PrintPage += PrintDocument_PrintPage;
         }
@@ -40,8 +39,8 @@ namespace BankSystem.View
                     var transactions = transactionController.Items.Cast<TransactionModel>().ToList();
                     transactionList = new BindingList<TransactionModel>(transactions);
                     txtid.DataSource = transactionList;
-                    txtid.DisplayMember = "id"; 
-                    txtid.ValueMember = "id"; 
+                    txtid.DisplayMember = "id";
+                    txtid.ValueMember = "id";
                 }
                 else
                 {
@@ -69,14 +68,12 @@ namespace BankSystem.View
             {
                 var allTransactions = transactionController.Items.Cast<TransactionModel>().ToList();
 
-                // Kiểm tra xem có giao dịch nào hay không
                 if (!allTransactions.Any())
                 {
                     MessageBox.Show("Không có dữ liệu giao dịch để hiển thị.");
                     return;
                 }
 
-                // Lọc giao dịch theo ID đã chọn
                 var filteredTransactions = allTransactions
                     .Where(t => t.id == transactionId)
                     .Select(t => new
@@ -90,19 +87,16 @@ namespace BankSystem.View
                         employee_id = t.employee_id
                     }).ToList();
 
-                // Kiểm tra dữ liệu đã lọc
 
                 if (!filteredTransactions.Any())
                 {
                     MessageBox.Show("Không có giao dịch nào cho ID đã chọn.");
-                    guna2DataGridView1.DataSource = null; // Xóa dữ liệu trước đó
+                    guna2DataGridView1.DataSource = null;
                     return;
                 }
 
-                // Cập nhật DataGridView với dữ liệu đã lọc
                 guna2DataGridView1.DataSource = filteredTransactions;
 
-                // Cập nhật tiêu đề cột
                 guna2DataGridView1.Columns["id"].HeaderText = "Mã Giao Dịch";
                 guna2DataGridView1.Columns["from_account_id"].HeaderText = "Số Tài Khoản Chuyển Tiền";
                 guna2DataGridView1.Columns["branch_id"].HeaderText = "Mã Chi Nhánh";
@@ -142,7 +136,6 @@ namespace BankSystem.View
                     employee_id = selectedRow.Cells["employee_id"].Value?.ToString()
                 };
 
-                // Cập nhật dữ liệu vào TextBox
                 txtid.Text = transaction.id.ToString();
             }
         }
@@ -155,7 +148,7 @@ namespace BankSystem.View
                 return;
             }
 
-            transaction.id = id; // Cập nhật ID trong đối tượng TransactionModel
+            transaction.id = id;
         }
         private void PrintDocument_PrintPage(object sender, PrintPageEventArgs e)
         {
@@ -163,7 +156,6 @@ namespace BankSystem.View
             {
                 DataGridViewRow selectedRow = guna2DataGridView1.SelectedRows[0];
 
-                // Lấy thông tin giao dịch từ dòng đã chọn
                 string printContent = $"Mã Giao Dịch: {selectedRow.Cells["id"].Value}\n" +
                                       $"Số Tài Khoản Chuyển Tiền: {selectedRow.Cells["from_account_id"].Value}\n" +
                                       $"Số Tài Khoản Nhận Tiền: {selectedRow.Cells["to_account_id"].Value}\n" +
@@ -172,12 +164,11 @@ namespace BankSystem.View
                                       $"Mã Chi Nhánh: {selectedRow.Cells["branch_id"].Value}\n" +
                                       $"Mã Nhân Viên: {selectedRow.Cells["employee_id"].Value}";
 
-                // In nội dung lên trang
                 e.Graphics.DrawString(printContent, new Font("Arial", 12), Brushes.Black, new PointF(100, 100));
             }
             else
             {
-                e.Cancel = true; // Hủy in nếu không có dòng nào được chọn
+                e.Cancel = true;
             }
         }
         private void txtid_SelectedIndexChanged_1(object sender, EventArgs e)
@@ -197,7 +188,6 @@ namespace BankSystem.View
 
         private void btn_print_Click(object sender, EventArgs e)
         {
-            // Kiểm tra xem có giao dịch nào được chọn để in không
             if (guna2DataGridView1.SelectedRows.Count > 0)
             {
                 PrintDialog printDialog = new PrintDialog();

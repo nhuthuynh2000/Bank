@@ -36,7 +36,6 @@ namespace BankSystem.View
             {
                 if (accountController.Load())
                 {
-                    // Chuyển đổi và kiểm tra xem danh sách tài khoản có dữ liệu không
                     var accounts = accountController.Items.Cast<AccountModel>().ToList();
                     if (accounts == null || !accounts.Any())
                     {
@@ -64,8 +63,8 @@ namespace BankSystem.View
         {
             if (cboAccountID.SelectedItem is AccountModel selectedAccount)
             {
-                this.selectedAccount = selectedAccount; // Lưu tài khoản đã chọn
-                SetDataToText(); // Cập nhật giao diện với dữ liệu tài khoản
+                this.selectedAccount = selectedAccount;
+                SetDataToText();
             }
         }
 
@@ -81,9 +80,9 @@ namespace BankSystem.View
 
         private void UpdateAccountBalance(AccountModel account, double depositAmount)
         {
-            account.balance += depositAmount; // Cộng tiền vào tài khoản
-            accountController.Update(account); // Cập nhật tài khoản
-            txtbalance.Text = account.balance.ToString("F2"); // Cập nhật giao diện
+            account.balance += depositAmount;
+            accountController.Update(account);
+            txtbalance.Text = account.balance.ToString("F2");
         }
 
         private void SaveDepositTransaction(AccountModel account, double depositAmount, EmployeeModel employee)
@@ -116,7 +115,7 @@ namespace BankSystem.View
             if (selectedAccount != null)
             {
                 txtbalance.Text = selectedAccount.balance.ToString("F2");
-                txtamount.Text = "0.00"; // Reset ô nhập tiền
+                txtamount.Text = "0.00";
             }
         }
 
@@ -146,7 +145,7 @@ namespace BankSystem.View
 
         private void btn_deposit_Click(object sender, EventArgs e)
         {
-            GetDataFromText(); // Lấy dữ liệu từ giao diện và xử lý nạp tiền
+            GetDataFromText();
         }
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

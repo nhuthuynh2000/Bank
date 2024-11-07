@@ -53,11 +53,9 @@ namespace BankSystem.View
         }
         private void UpdateLoginButtonState()
         {
-            // Kiểm tra xem cả hai ô nhập liệu đều có dữ liệu
             bool isUsernameFilled = !string.IsNullOrWhiteSpace(txt_email.Text);
             bool isPasswordFilled = !string.IsNullOrWhiteSpace(txt_pass.Text);
 
-            // Cập nhật trạng thái nút "Login"
             btn_login.Enabled = isUsernameFilled && isPasswordFilled;
         }
 
@@ -66,7 +64,7 @@ namespace BankSystem.View
             close.Visible = true;
             open.Visible = false;
             txt_pass.PasswordChar = '\0';
-            
+
         }
 
         private void close_Click(object sender, EventArgs e)

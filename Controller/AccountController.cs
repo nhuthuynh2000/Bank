@@ -1,13 +1,11 @@
 ﻿using BankSystem.Model;
-using System;
-using System.Collections.Generic;
 using System.Data.SqlClient;
 
 namespace BankSystem.Controller
 {
     internal class AccountController : IController
     {
-        readonly string connectionString = "server=BAONGOC\\DULICH;Initial Catalog=DotNet;User ID=sa;Password=123456";
+        readonly string connectionString = "server=localhost\\MSSQLSERVER;Initial Catalog=Bank;User ID=sa;Password=123456";
         List<IModel> accounts = new List<IModel>();
         public List<IModel> Items => accounts;
 

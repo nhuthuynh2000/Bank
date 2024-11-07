@@ -15,7 +15,7 @@ namespace BankSystem.View
     {
         private AccountController controller;
         private AccountModel account;
-        private BindingList<AccountModel> accountList; 
+        private BindingList<AccountModel> accountList;
         public DateTime selectedDate;
 
         public AccountView()
@@ -23,7 +23,7 @@ namespace BankSystem.View
             InitializeComponent();
             controller = new AccountController();
             account = new AccountModel();
-            accountList = new BindingList<AccountModel>(); 
+            accountList = new BindingList<AccountModel>();
             txtdateopened.CustomFormat = "dd/MM/yyyy";
             txtdateopened.Format = DateTimePickerFormat.Custom;
             this.Load += new EventHandler(AccountView_Load);
@@ -31,36 +31,36 @@ namespace BankSystem.View
 
         public void GetDataFromText()
         {
-            account.id = int.Parse(txtid.Text.Trim()); 
+            account.id = int.Parse(txtid.Text.Trim());
             account.customerid = txtcustomerid.Text.Trim();
             account.date_opened = txtdateopened.Value;
-            account.balance = double.Parse(txtbalance.Text.Trim()); 
+            account.balance = double.Parse(txtbalance.Text.Trim());
         }
 
         public void SetDataToText()
         {
             if (guna2DataGridView1.SelectedRows.Count > 0)
             {
-             
+
                 DataGridViewRow selectedRow = guna2DataGridView1.SelectedRows[0];
                 account = new AccountModel
                 {
                     id = int.Parse(selectedRow.Cells["id"].Value.ToString()),
                     customerid = selectedRow.Cells["customerid"].Value.ToString(),
-                   
+
                     date_opened = DateTime.ParseExact(selectedRow.Cells["date_opened"].Value.ToString(), "dd/MM/yyyy", System.Globalization.CultureInfo.InvariantCulture),
-                    balance = double.Parse(selectedRow.Cells["balance"].Value.ToString()) 
+                    balance = double.Parse(selectedRow.Cells["balance"].Value.ToString())
                 };
 
-                // Cập nhật dữ liệu vào TextBox
-                txtid.Text = account.id.ToString(); 
+
+                txtid.Text = account.id.ToString();
                 txtcustomerid.Text = account.customerid;
                 txtdateopened.Value = account.date_opened;
-                txtbalance.Text = account.balance.ToString("F2"); 
+                txtbalance.Text = account.balance.ToString("F2");
             }
         }
 
-        // Search theo ID
+
         public void SearchAccountById(string id)
         {
             if (controller.Load(id))
@@ -75,14 +75,14 @@ namespace BankSystem.View
 
         public void UpdateDataGridView()
         {
-            accountList.Clear(); // Xóa danh sách hiện tại trước khi thêm mới
+            accountList.Clear();
 
             foreach (var account in controller.Items.Cast<AccountModel>())
             {
-                accountList.Add(account); // Thêm mỗi tài khoản vào BindingList
+                accountList.Add(account);
             }
 
-            guna2DataGridView1.DataSource = accountList; // Gán BindingList làm nguồn dữ liệu
+            guna2DataGridView1.DataSource = accountList;
         }
 
         private void LoadAccounts()
@@ -91,17 +91,17 @@ namespace BankSystem.View
             {
                 if (controller.Load())
                 {
-                    var accountData = controller.Items.Cast<AccountModel    >().Select(account => new
+                    var accountData = controller.Items.Cast<AccountModel>().Select(account => new
                     {
                         id = account.id,
                         customerid = account.customerid,
-                        date_opened = account.date_opened.ToString("dd/MM/yyyy"), 
+                        date_opened = account.date_opened.ToString("dd/MM/yyyy"),
                         balance = account.balance
                     }).ToList();
 
-                    guna2DataGridView1.DataSource = accountData; 
+                    guna2DataGridView1.DataSource = accountData;
 
-                    // Đặt tên hiển thị cho các cột
+
                     guna2DataGridView1.Columns["id"].HeaderText = "Mã Tài Khoản";
                     guna2DataGridView1.Columns["customerid"].HeaderText = "Mã Khách Hàng";
                     guna2DataGridView1.Columns["date_opened"].HeaderText = "Ngày Mở";
@@ -122,7 +122,7 @@ namespace BankSystem.View
         {
             if (e.RowIndex >= 0)
             {
-                SetDataToText(); // Hiển thị dữ liệu dòng được chọn
+                SetDataToText();
             }
         }
 
@@ -149,7 +149,7 @@ namespace BankSystem.View
         {
             if (guna2DataGridView1.SelectedRows.Count > 0)
             {
-                SetDataToText(); // Cập nhật dữ liệu trong TextBox khi chọn dòng mới
+                SetDataToText();
             }
         }
 
@@ -160,14 +160,14 @@ namespace BankSystem.View
 
         private void btn_search_Click(object sender, EventArgs e)
         {
-            string id = txtsearch.Text; 
+            string id = txtsearch.Text;
             SearchAccountById(id);
         }
 
         private void btn_create_Click(object sender, EventArgs e)
         {
             GetDataFromText();
-            if (account.IsValidate()) 
+            if (account.IsValidate())
             {
                 try
                 {
@@ -175,7 +175,7 @@ namespace BankSystem.View
                     {
                         MessageBox.Show("Tài khoản đã được thêm thành công!");
                         ClearForm();
-                        LoadAccounts(); // Làm mới danh sách tài khoản
+                        LoadAccounts();
                     }
                     else
                     {
@@ -206,7 +206,7 @@ namespace BankSystem.View
                     {
                         MessageBox.Show("Tài khoản đã được cập nhật thành công!");
                         ClearForm();
-                        LoadAccounts(); 
+                        LoadAccounts();
                     }
                     else
                     {
@@ -229,7 +229,7 @@ namespace BankSystem.View
         {
             GetDataFromText();
 
-            if (account.IsValidate()) 
+            if (account.IsValidate())
             {
                 try
                 {
@@ -237,7 +237,7 @@ namespace BankSystem.View
                     {
                         MessageBox.Show("Tài khoản đã được xóa thành công!");
                         ClearForm();
-                        LoadAccounts(); 
+                        LoadAccounts();
                     }
                     else
                     {

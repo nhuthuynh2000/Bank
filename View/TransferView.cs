@@ -47,13 +47,11 @@ namespace BankSystem.View
                         return;
                     }
 
-                    // Tạo một danh sách riêng cho txtaccount
                     var fromAccounts = new BindingList<AccountModel>(accounts);
                     txtaccount.DataSource = fromAccounts;
                     txtaccount.DisplayMember = "id";
                     txtaccount.ValueMember = "id";
 
-                    // Tạo một danh sách riêng cho txtaccount2
                     var toAccounts = new BindingList<AccountModel>(accounts);
                     txtaccount2.DataSource = toAccounts;
                     txtaccount2.DisplayMember = "id";
@@ -75,9 +73,8 @@ namespace BankSystem.View
             if (txtaccount.SelectedItem is AccountModel selectedAccount)
             {
                 selectedAccountFrom = selectedAccount;
-                SetDataToText(); // Cập nhật số dư của tài khoản gửi
+                SetDataToText();
 
-                // Reset số dư của tài khoản nhận khi chọn tài khoản gửi khác
                 txtbalance2.Text = "0.00";
             }
         }
@@ -86,10 +83,9 @@ namespace BankSystem.View
         {
             if (txtaccount2.SelectedItem is AccountModel selectedAccount)
             {
-                selectedAccountTo = selectedAccount; // Lưu tài khoản được chọn
+                selectedAccountTo = selectedAccount;
                 Console.WriteLine($"Selected To Account ID: {selectedAccountTo.id}");
 
-                // Cập nhật số dư của tài khoản nhận
                 txtbalance2.Text = selectedAccountTo.balance.ToString("F2");
             }
         }
@@ -106,14 +102,13 @@ namespace BankSystem.View
 
         private void UpdateAccountBalances(double transferAmount)
         {
-            selectedAccountFrom.balance -= transferAmount; // Trừ từ tài khoản gửi
-            selectedAccountTo.balance += transferAmount; // Cộng vào tài khoản nhận
+            selectedAccountFrom.balance -= transferAmount;
+            selectedAccountTo.balance += transferAmount;
             accountController.Update(selectedAccountFrom);
             accountController.Update(selectedAccountTo);
 
-            // Cập nhật hiển thị số dư
-            txtbalance.Text = selectedAccountFrom.balance.ToString("F2"); // Cập nhật số dư tài khoản gửi
-            txtbalance2.Text = selectedAccountTo.balance.ToString("F2"); // Cập nhật số dư tài khoản nhận
+            txtbalance.Text = selectedAccountFrom.balance.ToString("F2");
+            txtbalance2.Text = selectedAccountTo.balance.ToString("F2");
         }
 
         private void SaveTransferTransaction(double transferAmount)
@@ -168,10 +163,10 @@ namespace BankSystem.View
                         return;
                     }
 
-                    SaveTransferTransaction(transferAmount); // Lưu giao dịch
-                    UpdateAccountBalances(transferAmount); // Cập nhật số dư
+                    SaveTransferTransaction(transferAmount);
+                    UpdateAccountBalances(transferAmount);
                     MessageBox.Show("Chuyển tiền thành công!");
-                    txtamount.Text = "0.00"; // Reset ô nhập tiền
+                    txtamount.Text = "0.00";
                 }
                 catch (Exception ex)
                 {
