@@ -610,11 +610,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\ADMIN\\Desktop\\CV\\Bank\\BankSystem.csproj",
+      "projectUniqueName": "C:\\Users\\ADMIN\\Desktop\\Project\\Bank\\BankSystem.csproj",
       "projectName": "BankSystem",
-      "projectPath": "C:\\Users\\ADMIN\\Desktop\\CV\\Bank\\BankSystem.csproj",
+      "projectPath": "C:\\Users\\ADMIN\\Desktop\\Project\\Bank\\BankSystem.csproj",
       "packagesPath": "C:\\Users\\ADMIN\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\ADMIN\\Desktop\\CV\\Bank\\obj\\",
+      "outputPath": "C:\\Users\\ADMIN\\Desktop\\Project\\Bank\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "F:\\Microsoft Visual Studio\\Shared\\NuGetPackages"
