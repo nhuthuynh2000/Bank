@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "c:\\Users\\ADMIN\\Desktop\\Project\\Bank\\BankSystem.csproj": {}
+    "C:\\Users\\ADMIN\\Desktop\\Project\\Bank\\BankSystem.csproj": {}
   },
   "projects": {
-    "c:\\Users\\ADMIN\\Desktop\\Project\\Bank\\BankSystem.csproj": {
+    "C:\\Users\\ADMIN\\Desktop\\Project\\Bank\\BankSystem.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\Users\\ADMIN\\Desktop\\Project\\Bank\\BankSystem.csproj",
+        "projectUniqueName": "C:\\Users\\ADMIN\\Desktop\\Project\\Bank\\BankSystem.csproj",
         "projectName": "BankSystem",
-        "projectPath": "c:\\Users\\ADMIN\\Desktop\\Project\\Bank\\BankSystem.csproj",
+        "projectPath": "C:\\Users\\ADMIN\\Desktop\\Project\\Bank\\BankSystem.csproj",
         "packagesPath": "C:\\Users\\ADMIN\\.nuget\\packages\\",
-        "outputPath": "c:\\Users\\ADMIN\\Desktop\\Project\\Bank\\obj\\",
+        "outputPath": "C:\\Users\\ADMIN\\Desktop\\Project\\Bank\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "F:\\Microsoft Visual Studio\\Shared\\NuGetPackages"
